@@ -66,6 +66,7 @@
         let ingredientCount = 0;
     function generateIngredientFields() {
             ingredientCount++;
+            const data = @json($unitys->pluck('label'));
             document.getElementById("ingredientCount").value = ingredientCount;
 
             const ingredientFieldsDiv = document.getElementById("ingredientFields");
@@ -101,6 +102,7 @@
                 option.textContent = value;
                 menu.appendChild(option);
                 });
+                fieldContainer.appendChild(menu);
 
                 const suppButton = document.createElement("button");
                 suppButton.textContent = "Retirer";
@@ -109,8 +111,6 @@
                 suppButton.addEventListener('click', () => {
                 ingredientFieldsDiv.removeChild(fieldContainer);
                 });
-
-                fieldContainer.appendChild(menu);
                 fieldContainer.appendChild(suppButton);
 
                 fieldContainer.appendChild(document.createElement("br"));

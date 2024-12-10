@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UnityController;
+use App\Http\Controllers\RecipeController;
+use App\Models\Type;
+use App\Models\Unity;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -24,7 +28,13 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('/signin', [RegisterController::class, 'showRegistrationForm'])->name('signin');
 Route::post('/signin', [RegisterController::class, 'signin']);
 
-Route::get('/add_recipe', [TypeController::class, 'index']);
+//Route::get('/add_recipe', [RecipeController::class, 'index']);
+Route::get('/add_recipe', function () {
+    $types = Type::all();
+    $unitys = Unity::all();
+
+    return view('add_recipe', compact('types', 'unitys'));
+});
 
 Route::get('/', function () {
     return view('welcome');
