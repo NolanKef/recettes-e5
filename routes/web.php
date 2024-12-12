@@ -28,6 +28,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
 Route::get('/signin', [RegisterController::class, 'showRegistrationForm'])->name('signin');
 Route::post('/signin', [RegisterController::class, 'signin']);
 
+Route::post('/recipes/store', [RecipeController::class, 'store'])->name('recipes.store');
+
 //Route::get('/add_recipe', [RecipeController::class, 'index']);
 Route::get('/add_recipe', function () {
     $types = Type::all();

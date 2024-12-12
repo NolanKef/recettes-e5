@@ -10,12 +10,13 @@
     <title>Ajouter une recette</title> 
 </head>
 <body>
+<?php //dd($unitys) ?>
     <div class="nav-links">
     <a href="">Liste des recettes</a>
     <a href="">Déconnexion</a>
     </div>
 <section class="main-content">
-    <form action="" method="POST">
+    <form action="{{ route('recipes.store') }}" method="POST">
     @csrf
     <h2>Ajouter une recette</h2>
     <input type="hidden" id="ingredientCount" name="ingredientCount" value="0">
@@ -62,61 +63,79 @@
         <input class="add-btn" name="save" type="submit" value="Ajouter la recette">
         <br><br>
     </form>
-    <script>
-        let ingredientCount = 0;
-    function generateIngredientFields() {
-            ingredientCount++;
-            const data = @json($unitys->pluck('label'));
-            document.getElementById("ingredientCount").value = ingredientCount;
-
-            const ingredientFieldsDiv = document.getElementById("ingredientFields");
-            const fieldContainer = document.createElement("div");
-            ingredientFieldsDiv.appendChild(fieldContainer);
-
-                const ingredientLabel = document.createElement("label");
-                ingredientLabel.innerText = `Ingrédient ${ingredientCount} : `;
-                fieldContainer.appendChild(ingredientLabel);
-
-                const ingredientInput = document.createElement("input");
-                ingredientInput.type = "text";
-                ingredientInput.name = `ingredient${ingredientCount}`;
-                ingredientInput.required = true;
-                fieldContainer.appendChild(ingredientInput);
-
-                const quantityLabel = document.createElement("label");
-                quantityLabel.innerText = " Quantité : ";
-                fieldContainer.appendChild(quantityLabel);
-
-                const quantityInput = document.createElement("input");
-                quantityInput.type = "text";
-                quantityInput.name = `quantity${ingredientCount}`;
-                quantityInput.required = true;
-                fieldContainer.appendChild(quantityInput);
-
-                const menu = document.createElement("select");
-                menu.name = `unity${ingredientCount}`;
-
-                data.forEach(value => {
-                const option = document.createElement('option');
-                option.value = value;
-                option.textContent = value;
-                menu.appendChild(option);
-                });
-                fieldContainer.appendChild(menu);
-
-                const suppButton = document.createElement("button");
-                suppButton.textContent = "Retirer";
-                suppButton.type = "button";
-
-                suppButton.addEventListener('click', () => {
-                ingredientFieldsDiv.removeChild(fieldContainer);
-                });
-                fieldContainer.appendChild(suppButton);
-
-                fieldContainer.appendChild(document.createElement("br"));
-        }
-
-    </script>
 </section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let ingredientCount = 0;
+
+    window.generateIngredientFields = function () {
+        ingredientCount++;
+        document.getElementById("ingredientCount").value = ingredientCount;
+
+        const ingredientFieldsDiv = document.getElementById("ingredientFields");
+
+        // Création du conteneur pour chaque groupe de champs
+        const fieldContainer = document.createElement("div");
+        fieldContainer.id = `ingredientField${ingredientCount}`;
+        fieldContainer.style.marginBottom = "10px";
+        ingredientFieldsDiv.appendChild(fieldContainer);
+
+        // Champ pour le nom de l'ingrédient
+        const ingredientLabel = document.createElement("label");
+        ingredientLabel.innerText = `Ingrédient ${ingredientCount} : `;
+        fieldContainer.appendChild(ingredientLabel);
+
+        const ingredientInput = document.createElement("input");
+        ingredientInput.type = "text";
+        ingredientInput.name = `ingredient${ingredientCount}`;
+        ingredientInput.placeholder = "Nom de l'ingrédient";
+        ingredientInput.required = true;
+        fieldContainer.appendChild(ingredientInput);
+
+        // Champ pour la quantité
+        const quantityLabel = document.createElement("label");
+        quantityLabel.innerText = " Quantité : ";
+        fieldContainer.appendChild(quantityLabel);
+
+        const quantityInput = document.createElement("input");
+        quantityInput.type = "number";
+        quantityInput.name = `quantity${ingredientCount}`;
+        quantityInput.placeholder = "Quantité";
+        quantityInput.required = true;
+        fieldContainer.appendChild(quantityInput);
+
+        // Liste déroulante pour les unités
+        const unitLabel = document.createElement("label");
+        unitLabel.innerText = " Unité : ";
+        fieldContainer.appendChild(unitLabel);
+
+        const unitSelect = document.createElement("select");
+        unitSelect.name = `unity${ingredientCount}`;
+        unitSelect.required = true;
+
+        // Remplir le menu déroulant avec les données des unités
+        const data = @json($unitys->pluck('label', 'code'));
+        Object.entries(data).forEach(([code, label]) => {
+            console.log(`Ajout de l'option: id=${code}, label=${label}`);
+            const option = document.createElement("option");
+            option.value = code;
+            option.textContent = label;
+            unitSelect.appendChild(option);
+        });
+        fieldContainer.appendChild(unitSelect);
+
+        // Bouton pour supprimer ce groupe de champs
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Retirer";
+        deleteButton.style.marginLeft = "10px";
+        deleteButton.addEventListener("click", () => {
+            ingredientFieldsDiv.removeChild(fieldContainer);
+        });
+        fieldContainer.appendChild(deleteButton);
+    };
+});
+
+</script>
 </body>
 </html>
