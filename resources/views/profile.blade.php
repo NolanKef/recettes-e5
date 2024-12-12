@@ -18,13 +18,10 @@
     <section class="profile-content">
     <h1><span>Recettes de {{ $user->first_name }} {{ $user->last_name }}</span></h1>
     <a class="add-btn" href="{{ url('add_recipe') }}">Ajouter +</a>
-    <form class="form-filter" action="" method="POST">
-        <select name="filtre">
-        <option value="all">Tout</option>
-        </select>
-        <input type="submit" name="filter" value="Filtrer">
-    </form>
     <ul>
+        @foreach ($recipes_content as $recipe)
+            <li><a href="{{ route('recipe.show', $recipe->id_recipe) }}">{{ $recipe->recipe_name }}</a></li>
+        @endforeach
     </ul>
     </section>
 </body>

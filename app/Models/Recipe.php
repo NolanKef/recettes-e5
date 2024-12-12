@@ -14,8 +14,13 @@ class Recipe extends Model
 
     protected $fillable = ['recipe_name', 'recipe_content', 'view', 'date_add', 'date_update', 'id_user', 'id_type'];
 
-    public function quantites()
+    public function quantities()
     {
         return $this->hasMany(Quantite::class, 'id_recipe');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'id_type', 'id_type');
     }
 }

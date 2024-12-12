@@ -18,4 +18,15 @@ class Quantite extends Model
     {
         return $this->belongsTo(Recipe::class, 'id_recipe');
     }
+
+    public function ingredient()
+    {
+        return $this->belongsTo(Ingredient::class, 'id_ingredient');
+    }
+
+    public function unity()
+    {
+        return $this->belongsTo(Unity::class, 'code');
+    }
+
 }

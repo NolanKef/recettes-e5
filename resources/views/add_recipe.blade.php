@@ -10,9 +10,8 @@
     <title>Ajouter une recette</title> 
 </head>
 <body>
-<?php //dd($unitys) ?>
     <div class="nav-links">
-    <a href="">Liste des recettes</a>
+    <a href="{{ url('profile') }}">Liste des recettes</a>
     <a href="">Déconnexion</a>
     </div>
 <section class="main-content">

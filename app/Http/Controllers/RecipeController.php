@@ -18,6 +18,18 @@ class RecipeController extends Controller
     return view('recipes.create', compact('unitys'));
     }
 
+    public function show($id)
+    {
+
+    $recipe = Recipe::with([
+        'quantities.ingredient',
+        'quantities.unity',
+        'type'
+    ])->findOrFail($id);
+
+    return view('recipe', compact('recipe'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

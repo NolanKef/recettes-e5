@@ -8,6 +8,7 @@ use App\Http\Controllers\UnityController;
 use App\Http\Controllers\RecipeController;
 use App\Models\Type;
 use App\Models\Unity;
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -38,9 +39,17 @@ Route::get('/add_recipe', function () {
     return view('add_recipe', compact('types', 'unitys'));
 });
 
+/*Route::get('/profile', function () {
+    $recipes_content = Recipe::all();
+
+    return view('profile', compact('recipes_content'));
+});*/
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe.show');
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();
@@ -51,7 +60,6 @@ Route::post('/logout', function (Request $request) {
 })->name('logout');
 
 Route::get('/profile', function () {
-    return view('profile', [
-        'user' => Auth::user()
-    ]);
+    $recipes_content = Recipe::all();
+    return view('profile', ['user' => Auth::user()], compact('recipes_content'));
 })->middleware('auth');
