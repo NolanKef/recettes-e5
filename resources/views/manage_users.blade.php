@@ -11,7 +11,7 @@
 <body>
 <title>Gestion des utilisateurs</title>
     <div class="nav-links">
-    <a href="" target="_blank"><img src="pics/home.png" width="20px"></a>
+    <a href="{{ url('profile') }}" target="_blank"><img src="pics/home.png" width="20px"></a>
     <a href="">Déconnexion</a>
     <a href="">Edition</a>
     </div>
