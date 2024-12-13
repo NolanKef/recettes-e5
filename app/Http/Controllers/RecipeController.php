@@ -33,12 +33,11 @@ class RecipeController extends Controller
     public function userRecipes()
     {
         $user = Auth::user();
-        $recipes = Recipe::with('type')
-        ->where('id_user', $user->id)
-        ->get();
+        $recipes = Recipe::where('id_user', Auth::id())->get();
 
         return view('profile', compact('recipes', 'user'));
     }
+
 
     public function store(Request $request)
     {

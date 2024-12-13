@@ -32,7 +32,7 @@ Route::post('/signin', [RegisterController::class, 'signin']);
 
 Route::post('/recipes/store', [RecipeController::class, 'store'])->name('recipes.store');
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe.show');
-Route::get('/profile', [RecipeController::class, 'userRecipes'])->name('recipes.user');
+Route::get('/profile', [RecipeController::class, 'userRecipes'])->name('recipes.user')->middleware('auth');
 
 Route::get('/manage_users', [UserController::class, 'index'])->name('users.index');
 

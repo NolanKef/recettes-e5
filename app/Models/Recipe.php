@@ -23,4 +23,9 @@ class Recipe extends Model
     {
         return $this->belongsTo(Type::class, 'id_type', 'id_type');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

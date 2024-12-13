@@ -20,7 +20,6 @@
     <h1><span>Espace de</span> {{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h1>
     <a class="add-btn" href="">Ajouter utilisateur</a>
     <ul>
-    <h1> <span>utilisateur(s)<span></h1>
         @foreach ($users as $user)
             <li><a href="">{{ $user->first_name }} {{ $user->last_name }}</a></li>
         @endforeach
