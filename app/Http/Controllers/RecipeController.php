@@ -30,6 +30,16 @@ class RecipeController extends Controller
     return view('recipe', compact('recipe'));
     }
 
+    public function userRecipes()
+    {
+        $user = Auth::user();
+        $recipes = Recipe::with('type')
+        ->where('id_user', $user->id)
+        ->get();
+
+        return view('profile', compact('recipes', 'user'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([

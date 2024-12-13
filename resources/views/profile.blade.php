@@ -12,14 +12,14 @@
 <title>Recettes de {{ $user->first_name }} {{ $user->last_name }}</title>
     <div class="nav-links">
     <a href=""><img src="pics/users.png" width="25px"></a>
-    <a href="">Déconnexion</a>
+    <form action="{{ route('logout') }}" method="POST">@csrf<button type="submit">Déconnexion</button></form>
     <a href="">Edition</a>
     </div>
     <section class="profile-content">
     <h1><span>Recettes de {{ $user->first_name }} {{ $user->last_name }}</span></h1>
     <a class="add-btn" href="{{ url('add_recipe') }}">Ajouter +</a>
     <ul>
-        @foreach ($recipes_content as $recipe)
+        @foreach ($recipes as $recipe)
             <li><a href="{{ route('recipe.show', $recipe->id_recipe) }}">{{ $recipe->recipe_name }}</a></li>
         @endforeach
     </ul>

@@ -31,6 +31,10 @@ Route::post('/signin', [RegisterController::class, 'signin']);
 
 Route::post('/recipes/store', [RecipeController::class, 'store'])->name('recipes.store');
 
+Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe.show');
+
+Route::get('/profile', [RecipeController::class, 'userRecipes'])->name('recipes.user');
+
 //Route::get('/add_recipe', [RecipeController::class, 'index']);
 Route::get('/add_recipe', function () {
     $types = Type::all();
@@ -49,17 +53,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe.show');
-
-Route::post('/logout', function (Request $request) {
+/*Route::post('/logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();
     $request->session()->regenerateToken();
+    return redirect('/login');
+})->name('logout');*/
 
-    return redirect('/');
-})->name('logout');
-
-Route::get('/profile', function () {
+/*Route::get('/profile', function () {
     $recipes_content = Recipe::all();
     return view('profile', ['user' => Auth::user()], compact('recipes_content'));
-})->middleware('auth');
+})->middleware('auth');*/
+
+Route::post('/logout', function (Illuminate\Http\Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('login');
+})->name('logout');

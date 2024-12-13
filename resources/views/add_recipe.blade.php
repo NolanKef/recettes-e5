@@ -12,7 +12,7 @@
 <body>
     <div class="nav-links">
     <a href="{{ url('profile') }}">Liste des recettes</a>
-    <a href="">Déconnexion</a>
+    <form action="{{ route('logout') }}" method="POST">@csrf<button type="submit">Déconnexion</button></form>
     </div>
 <section class="main-content">
     <form action="{{ route('recipes.store') }}" method="POST">
@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const ingredientInput = document.createElement("input");
         ingredientInput.type = "text";
         ingredientInput.name = `ingredient${ingredientCount}`;
-        ingredientInput.placeholder = "Nom de l'ingrédient";
         ingredientInput.required = true;
         fieldContainer.appendChild(ingredientInput);
 
@@ -99,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const quantityInput = document.createElement("input");
         quantityInput.type = "number";
         quantityInput.name = `quantity${ingredientCount}`;
-        quantityInput.placeholder = "Quantité";
         quantityInput.required = true;
         fieldContainer.appendChild(quantityInput);
 

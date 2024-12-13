@@ -30,5 +30,6 @@ class LoginController extends Controller
             'email' => 'Les informations d’identification ne correspondent pas.',
         ])->onlyInput('email');
     }
+
 }
 
