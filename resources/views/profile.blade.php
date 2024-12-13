@@ -11,7 +11,9 @@
 <body>
 <title>Recettes de {{ $user->first_name }} {{ $user->last_name }}</title>
     <div class="nav-links">
-    <a href=""><img src="pics/users.png" width="25px"></a>
+    @if ($user->id_role == 1)
+    <a href="{{ route('users.index') }}"><img src="{{ asset('pics/users.png') }}" width="30px"></a>
+    @endif
     <form action="{{ route('logout') }}" method="POST">@csrf<button type="submit">Déconnexion</button></form>
     <a href="">Edition</a>
     </div>

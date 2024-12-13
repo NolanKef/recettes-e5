@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UnityController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\UserController;
 use App\Models\Type;
 use App\Models\Unity;
 use App\Models\Recipe;
@@ -30,10 +31,10 @@ Route::get('/signin', [RegisterController::class, 'showRegistrationForm'])->name
 Route::post('/signin', [RegisterController::class, 'signin']);
 
 Route::post('/recipes/store', [RecipeController::class, 'store'])->name('recipes.store');
-
 Route::get('/recipe/{id}', [RecipeController::class, 'show'])->name('recipe.show');
-
 Route::get('/profile', [RecipeController::class, 'userRecipes'])->name('recipes.user');
+
+Route::get('/manage_users', [UserController::class, 'index'])->name('users.index');
 
 //Route::get('/add_recipe', [RecipeController::class, 'index']);
 Route::get('/add_recipe', function () {
