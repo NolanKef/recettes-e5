@@ -54,6 +54,7 @@ class RecipeController extends Controller
             'recipe_name' => $validated['title'],
             'recipe_content' => $validated['content'],
             'view' => $validated['view'],
+            'vegan' => $validated['is_vegan'],
             'date_add' => now(),
             'id_user' => Auth::id(),
             'id_type' => $validated['type'],

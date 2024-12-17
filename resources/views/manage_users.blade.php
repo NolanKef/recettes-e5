@@ -12,7 +12,7 @@
 <title>Gestion des utilisateurs</title>
     <div class="nav-links">
     <a href="{{ url('profile') }}" target="_blank"><img src="pics/home.png" width="20px"></a>
-    <a href="">Déconnexion</a>
+    <form action="{{ route('logout') }}" method="POST">@csrf<button type="submit">Déconnexion</button></form>
     <a href="">Edition</a>
     </div>
 

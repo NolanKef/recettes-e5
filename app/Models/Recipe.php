@@ -12,7 +12,7 @@ class Recipe extends Model
     protected $table = 'recipe';
     protected $primaryKey = 'id_recipe';
 
-    protected $fillable = ['recipe_name', 'recipe_content', 'view', 'date_add', 'date_update', 'id_user', 'id_type'];
+    protected $fillable = ['recipe_name', 'recipe_content', 'view', 'is_vegan', 'date_add', 'date_update', 'id_user', 'id_type'];
 
     public function quantities()
     {
